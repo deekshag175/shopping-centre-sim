@@ -1,4 +1,7 @@
 import pygame
+import person
+import random
+import sys
 
 class shopping_centre:
     
@@ -13,10 +16,17 @@ class shopping_centre:
         pygame.display.set_caption("Shopping Centre Simulator")
         pygame.init()
 
-        allpeople = [person(1,1,p) for p in range (numpeople)]
+        allpeople = [person.person(displaysize,random.randint(0,self.width),random.randint(0,self.height),p) for p in range (self.numpeople)]
+
         
+        for i in range(0, len(allpeople)-1):
+            allpeople[i].draw()
+            print(str(i))
+
         while True:
-            for i in len(allpeople):
-                allpeople[i].draw()
-            
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    pygame.quit()
+                    sys.exit()
+            pygame.display.update()
         

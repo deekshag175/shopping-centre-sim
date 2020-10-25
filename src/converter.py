@@ -45,13 +45,14 @@ def generatePeopleSteps(number_of_people):
  
 if __name__ == '__main__':
     # TODO: Add exception handling to check the inputs and make sure that we have 3 values
-    """
+    
     number_of_people = int(sys.argv[1])
+    """
     total_power = generatePeopleSteps(number_of_people)
     total_power_price = total_power * price_conversion_rate_per_kw
     print("\n\n You saved £{:,.2f} and generated {:,.2f} KWH ".format((total_power_price), float(total_power)))
     """
-    sc = shopping_centre.shopping_centre()
+    sc = shopping_centre.shopping_centre(number_of_people)
     sc.draw()
 
 
