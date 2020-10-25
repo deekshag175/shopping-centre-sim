@@ -16,17 +16,22 @@ class shopping_centre:
         pygame.display.set_caption("Shopping Centre Simulator")
         pygame.init()
 
-        allpeople = [person.person(displaysize,random.randint(0,self.width),random.randint(0,self.height),p) for p in range (self.numpeople)]
+        # TODO: Deeksha to define number of steps as an input mechanism for each person - maybe randomise up front
+        allpeople = [person.person(displaysize, random.randint(0,self.width), random.randint(0,self.height), p) \
+            for p in range (self.numpeople)]
 
-        
         for i in range(0, len(allpeople)-1):
             allpeople[i].draw()
             print(str(i))
 
         while True:
             for event in pygame.event.get():
+                # TODO: Deeksha to add an event to the game so that id someone presses the Q button it quits
                 if event.type == pygame.QUIT:
                     pygame.quit()
                     sys.exit()
             pygame.display.update()
+            # TODO: Deeksha to create a new score counter which will update on each go with an increment of people * steps * energy value = GBP
+            
+
         

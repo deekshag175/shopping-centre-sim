@@ -10,11 +10,9 @@ class person:
         self.surface = surface
 
     def draw(self):
-        WHITE =(255,255,255)
-        BLUE =(0,0,255)
         person_shopping = pygame.image.load('person_shopping.png')
-        person_rect = Rect(self.posx, self.posy, 8, 8)
         self.surface.blit(person_shopping, (self.posx, self.posy))
         pygame.display.update()
         print("{},{}".format(self.posx, self.posy))
-        
+    
+    # TODO: Deeksha to create a draw method which will move the shoppers along a square at a time
