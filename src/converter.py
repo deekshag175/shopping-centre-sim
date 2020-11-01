@@ -3,37 +3,7 @@ import sys
 import random
 import logging
 import shopping_centre
-price_conversion_rate_per_kw = 0.1437
-number_of_Steps_per_KWH = 8800
- 
-def calculatePowerFromSteps( number_of_steps):
-    """ 
-    This function calculates power from steps.
-    Power is measured in Watts
-    Force is measured in Newtons
- 
-    Parameters
-    ----------
-    weight : float, mandatory
-            The weight of the person walking on the tile
-    number_of_steps : float, mandatory
-            Number of steps within a period of time
-    time_in_minutes : float, optional 
-            Number of minutes taken to achieve these steps
-    """
-    power = number_of_Steps_per_KWH/number_of_steps
-    print("DEBUG: Total power {} KWH".format(power))
-    return power
- 
-def calculatePriceFromPower(power):
-    price = power * price_conversion_rate_per_kw
-    return price
- 
-def calculatePricePowerByStepCount(number_of_steps):
-    power = calculatePowerFromSteps(number_of_steps)
-    price = calculatePriceFromPower(power)
-    print("DEBUG: You saved £{} and generated {} KWH ".format(str(price).zfill(2), float(power)))
-    return power, price
+
 
 def generatePeopleSteps(number_of_people):
     all_power = []

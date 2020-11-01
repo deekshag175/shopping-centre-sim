@@ -1,5 +1,5 @@
 import pygame
-import person
+import person, power
 import random
 import sys
 
@@ -11,6 +11,7 @@ class shopping_centre:
         self.numshops = 10
         self.numpeople = numpeople
         self.step_counter = 0
+        self.seconds_counter = 0
         
     def draw(self):
         displaysize = pygame.display.set_mode((self.width, self.height))
@@ -20,6 +21,8 @@ class shopping_centre:
         pygame.font.init()
         myfont = pygame.font.SysFont('Comic Sans MS', 16)
         textsurface = myfont.render('Steps: 0', True, (255, 255, 255))
+
+        _power = power.power()
 
         # TODO: Deeksha to define number of steps as an input mechanism for each person - maybe randomise up front
         allpeople = [person.person(displaysize, random.randint(0,self.width), random.randint(0,self.height), p) \
@@ -38,20 +41,11 @@ class shopping_centre:
             for i in range(0, len(allpeople)-1):
                 allpeople[i].move()
                 self.step_counter = self.step_counter + 1
-            pygame.draw.rect(textsurface, (0, 0, 0), (0, 768, 1280, 30))
-            textsurface = myfont.render('Steps: {}'.format(str(self.step_counter)), True, (255, 255, 255))
+            # TODO: Deeksha to create a new score counter which will update on each go with an increment of people * steps * energy value = GBP    
+            displaysize.fill((0, 0, 0), (0, 768, 1280, 30))
+            price, powerout = _power.calculatePricePowerByStepCount(self.step_counter)
+            textsurface = myfont.render('Time: {} seconds | Steps: {} | Cumulative Power: {} KW, | Cost Savings: £{}'.format(str(self.seconds_counter), str(self.step_counter), str(round(powerout, 3)), str(round(price, 2)).zfill(2)), True, (255, 255, 255))
             displaysize.blit(textsurface, (0, 768))
             pygame.time.wait(1000)
             pygame.display.update()
-            # TODO: Deeksha to create a new score counter which will update on each go with an increment of people * steps * energy value = GBP
-
-
-         # you have to call this at the start, 
-                   # if you want to use this module.
-
-
-
-
-
-
-
+            self.seconds_counter = self.seconds_counter + 1
