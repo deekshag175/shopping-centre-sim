@@ -21,17 +21,20 @@ class shopping_centre:
             for p in range (self.numpeople)]
 
         for i in range(0, len(allpeople)-1):
-            allpeople[i].draw()
+            allpeople[i].draw(allpeople[i].posx)
             print(str(i))
 
         while True:
             for event in pygame.event.get():
-                # TODO: Deeksha to add an event to the game so that id someone presses the Q button it quits
+                # TODO: Deeksha to add an event to the game so that if someone presses the Q button it quits
                 if event.type == pygame.QUIT:
                     pygame.quit()
                     sys.exit()
+                for i in range(0, len(allpeople)-1):
+                    for j in range(0, 10):
+                        allpeople[i].move()
             pygame.display.update()
             # TODO: Deeksha to create a new score counter which will update on each go with an increment of people * steps * energy value = GBP
-            
+
 
         
