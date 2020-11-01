@@ -9,6 +9,7 @@ class person:
         self.numsteps = numsteps
         self.surface = surface
         self.person_shopping = pygame.image.load('person_shopping.png')
+        self.check_screen_pos()
 
     def draw(self, posx):
         self.surface.blit(self.person_shopping, (posx, self.posy))
