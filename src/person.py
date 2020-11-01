@@ -15,10 +15,14 @@ class person:
         pygame.display.update()
         print("{},{}".format(posx, self.posy))
     
-    # TODO: Deeksha to create a draw method which will move the shoppers along a square at a time
     def move(self):
-        prev_pos = self.person_shopping.get_rect()
+        pygame.draw.rect(self.surface, (0, 0, 0), (self.posx, self.posy, 32, 32))
+        if self.posx > 1280: self.posx = 0
         self.posx = self.posx + 32
         self.draw(self.posx)
-        pygame.draw.rect(self.surface, (0, 0, 0), prev_pos)
-        pygame.display.update()
+
+    def check_screen_pos(self):
+        if self.posy > 736: # This is 768 which is the screen height - the size of the shopper graphic
+            self.posy = 736
+        
+    # TODO: write a function that checks whether each shopper is in the space of another shopper
