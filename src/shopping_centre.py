@@ -34,8 +34,7 @@ class shopping_centre:
 
         while True:
             for event in pygame.event.get():
-                # TODO: Deeksha to add an event to the game so that if someone presses the Q button it quits
-                if event.type == pygame.QUIT:
+                if (event.type == pygame.QUIT or (event.type == pygame.KEYDOWN and event.key == pygame.K_q)):
                     pygame.quit()
                     sys.exit()
             for i in range(0, len(allpeople)-1):
