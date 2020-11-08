@@ -12,23 +12,41 @@ class shopping_centre:
         self.numpeople = numpeople
         self.step_counter = 0
         self.seconds_counter = 0
+
+    def __init_power_text(self, shopping_centre_display):
+        # initiate the font loader
+        pygame.font.init()
+        myfont = pygame.font.SysFont('Comic Sans MS', 16)
+        textsurface = myfont.render('Steps: 0', True, (255, 255, 255))
+        # create our power object
+        _power = power.power()
+        # Label the shops at the top of the screen
+        myfont_shops = pygame.font.SysFont('Comic Sans MS', 48)
+        textsurface_shops = myfont.render('Shops', True, (255, 255, 255))
+        shopping_centre_display.blit(textsurface_shops, (0, 10))
+        return _power, textsurface, myfont
+
+    def __draw_internal_shops(self, shopping_centre_display):
+        # Draw in the shops at the top of the screen
+        shopping_centre_display.fill((255, 0, 0), (0, 0, 1280, 150))
+        # Draw in the shops at the bottom of the screen
+        shopping_centre_display.fill((255, 0, 0), (0, 618, 1280, 150))
+
         
     def draw(self):
         displaysize = pygame.display.set_mode((self.width, self.height))
         pygame.display.set_caption("Shopping Centre Simulator")
         pygame.init()
 
-        pygame.font.init()
-        myfont = pygame.font.SysFont('Comic Sans MS', 16)
-        textsurface = myfont.render('Steps: 0', True, (255, 255, 255))
-
-        _power = power.power()
+        _power, textsurface, myfont = self.__init_power_text(displaysize)
+        self.__draw_internal_shops(displaysize)
 
         # TODO: Deeksha to define number of steps as an input mechanism for each person - maybe randomise up front
-        allpeople = [person.person(displaysize, random.randint(0,self.width), random.randint(0,self.height), p) \
-            for p in range (self.numpeople)]
+        # Adding shopping centre channel in the middle of the screen 150px up top and 150px at the bottom
+        allpeople = [person.person(displaysize, random.randint(0, self.width), random.randint(150, self.height - 210), p) \
+            for p in range (self.numpeople + 1)]
 
-        for i in range(0, len(allpeople)-1):
+        for i in range(0, len(allpeople)):
             allpeople[i].draw(allpeople[i].posx)
             print(str(i))
 
