@@ -17,4 +17,4 @@ jobs:
         - name: Run tests
           run: python -m pytest tests/power-tests.py
         - name: Code Coverage
-          run: pytest --cov=./tests
+          run: pytest --cov=src tests/
