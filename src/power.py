@@ -20,7 +20,8 @@ class power:
         """
         power = float(number_of_steps / self.number_of_Steps_per_KWH)
         print("DEBUG: Total power {} KWH".format(power))
-        return power
+        return round(power, 4)
+
     
     def calculatePriceFromPower(self, power):
         price = power * self.price_conversion_rate_per_kw
