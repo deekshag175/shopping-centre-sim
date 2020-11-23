@@ -1,5 +1,5 @@
 import pytest
-from src.power import power
+from power.power import power
 
 def test_calculate_power_from_steps():
     number_of_steps = 25
