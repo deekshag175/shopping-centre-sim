@@ -1,7 +1,7 @@
 import pygame
-import person, power
+import person, power, shops
 import random
-import sys
+import sys, os
 
 class shopping_centre:
     
@@ -28,10 +28,23 @@ class shopping_centre:
 
     def __draw_internal_shops(self, shopping_centre_display):
         # Draw in the shops at the top of the screen
-        shopping_centre_display.fill((255, 0, 0), (0, 0, 1280, 150))
+        pygame.draw.line(shopping_centre_display, (255, 255, 255), (0, 150), (1280, 150))
+        pygame.display.flip()
         # Draw in the shops at the bottom of the screen
-        shopping_centre_display.fill((255, 0, 0), (0, 618, 1280, 150))
-
+        pygame.draw.line(shopping_centre_display, (255, 255, 255), (0, 618), (1280, 618))
+        pygame.display.flip()
+        
+        all_shops = []
+        all_shops.append(shops.shops(shopping_centre_display, '1_nike_logo.png'))
+        all_shops.append(shops.shops(shopping_centre_display, '2_subway_logo.png'))
+        all_shops.append(shops.shops(shopping_centre_display, '3_sportdirect_logo.png'))
+        all_shops.append(shops.shops(shopping_centre_display, '4_apple_logo.png'))
+        all_shops.append(shops.shops(shopping_centre_display, '5_waterstones_logo.png'))
+        all_shops.append(shops.shops(shopping_centre_display, '6_primark_logo.png'))
+        all_shops.append(shops.shops(shopping_centre_display, '7_tesco_logo.png'))
+        all_shops.append(shops.shops(shopping_centre_display, '8_boots_logo.png'))
+        for x in all_shops:
+            x.draw_to_screen()
         
     def draw(self):
         displaysize = pygame.display.set_mode((self.width, self.height))
