@@ -1,4 +1,4 @@
-from pygame import pygame
+import pygame
 import power.person, power.power, power.shops
 import random
 import sys, os
