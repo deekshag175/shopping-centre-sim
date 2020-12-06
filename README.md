@@ -13,7 +13,7 @@ There is a file in the repository called converter.py that helps us to calculate
 You can run this using the following
 
 ```
-python converter.py
+python converter.py 50
 ```
 
 You should see a shopping centre with all of the various shoppers like so:
