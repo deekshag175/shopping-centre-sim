@@ -1,5 +1,5 @@
 import pygame
-import person, power, shops
+import power.person, power.power, power.shops
 import random
 import sys, os
 
