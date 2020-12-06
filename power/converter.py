@@ -4,6 +4,13 @@ import random
 import logging
 import shopping_centre
 
+def is_integer(n):
+    try:
+        int(n)
+    except ValueError:
+        return False
+    else:
+        return True
 
 def generatePeopleSteps(number_of_people):
     all_power = []
@@ -14,14 +21,9 @@ def generatePeopleSteps(number_of_people):
     return sum(all_power)
  
 if __name__ == '__main__':
-    # TODO: Add exception handling to check the inputs and make sure that we have 3 values
-    
-    #number_of_people = int(sys.argv[1])
-    number_of_people = 25
-    """
-    total_power = generatePeopleSteps(number_of_people)
-    total_power_price = total_power * price_conversion_rate_per_kw
-    print("\n\n You saved £{:,.2f} and generated {:,.2f} KWH ".format((total_power_price), float(total_power)))
-    """
-    sc = shopping_centre.shopping_centre(number_of_people)
-    sc.draw()
+    if (len(sys.argv) > 1) and is_integer(sys.argv[1]):
+        number_of_people = int(sys.argv[1])
+        sc = shopping_centre.shopping_centre(number_of_people)
+        sc.draw()
+    else:
+        print("Usage: python converter.py [number_of_people]")        
