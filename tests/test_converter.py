@@ -1,8 +1,5 @@
 import pytest
-#from power.power import power
-#from person.person import person
 from power.converter import converter
-import power.shopping_centre 
 
 def test_is_integer_true():
     myint = "25"

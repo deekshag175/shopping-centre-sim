@@ -1,5 +1,7 @@
 import pygame
-import power.person, power.power, power.shops
+from power.power import power
+from power.shops import shops
+from power.person import person, person_pygame
 import random
 import sys, os
 
@@ -12,6 +14,10 @@ class shopping_centre:
         self.numpeople = numpeople
         self.step_counter = 0
         self.seconds_counter = 0
+        self.display = pygame.display.set_mode((self.width, self.height))
+        pygame.display.set_caption("Shopping Centre Simulator")
+        pygame.init()
+        self.pers_pygame = person_pygame(self.display)
 
     def __init_power_text(self, shopping_centre_display):
         # initiate the font loader
@@ -19,7 +25,7 @@ class shopping_centre:
         myfont = pygame.font.SysFont('Comic Sans MS', 16)
         textsurface = myfont.render('Steps: 0', True, (255, 255, 255))
         # create our power object
-        _power = power.power()
+        _power = power()
         # Label the shops at the top of the screen
         myfont_shops = pygame.font.SysFont('Comic Sans MS', 48)
         textsurface_shops = myfont.render('Shops', True, (255, 255, 255))
@@ -35,28 +41,26 @@ class shopping_centre:
         pygame.display.flip()
         
         all_shops = []
-        all_shops.append(shops.shops(shopping_centre_display, '1_nike_logo.png'))
-        all_shops.append(shops.shops(shopping_centre_display, '2_subway_logo.png'))
-        all_shops.append(shops.shops(shopping_centre_display, '3_sportdirect_logo.png'))
-        all_shops.append(shops.shops(shopping_centre_display, '4_apple_logo.png'))
-        all_shops.append(shops.shops(shopping_centre_display, '5_waterstones_logo.png'))
-        all_shops.append(shops.shops(shopping_centre_display, '6_primark_logo.png'))
-        all_shops.append(shops.shops(shopping_centre_display, '7_tesco_logo.png'))
-        all_shops.append(shops.shops(shopping_centre_display, '8_boots_logo.png'))
+        all_shops.append(shops(shopping_centre_display, '1_nike_logo.png'))
+        all_shops.append(shops(shopping_centre_display, '2_subway_logo.png'))
+        all_shops.append(shops(shopping_centre_display, '3_sportdirect_logo.png'))
+        all_shops.append(shops(shopping_centre_display, '4_apple_logo.png'))
+        all_shops.append(shops(shopping_centre_display, '5_waterstones_logo.png'))
+        all_shops.append(shops(shopping_centre_display, '6_primark_logo.png'))
+        all_shops.append(shops(shopping_centre_display, '7_tesco_logo.png'))
+        all_shops.append(shops(shopping_centre_display, '8_boots_logo.png'))
         for x in all_shops:
             x.draw_to_screen()
         
     def draw(self):
-        displaysize = pygame.display.set_mode((self.width, self.height))
-        pygame.display.set_caption("Shopping Centre Simulator")
-        pygame.init()
+        
 
-        _power, textsurface, myfont = self.__init_power_text(displaysize)
-        self.__draw_internal_shops(displaysize)
+        _power, textsurface, myfont = self.__init_power_text(self.display)
+        self.__draw_internal_shops(self.display)
 
         # TODO: Deeksha to define number of steps as an input mechanism for each person - maybe randomise up front
         # Adding shopping centre channel in the middle of the screen 150px up top and 150px at the bottom
-        allpeople = [person.person(displaysize, random.randint(0, self.width), random.randint(150, self.height - 210), p) \
+        allpeople = [person(self.pers_pygame, random.randint(0, self.width), random.randint(150, self.height - 210), p) \
             for p in range (self.numpeople + 1)]
 
         for i in range(0, len(allpeople)):
@@ -72,10 +76,10 @@ class shopping_centre:
                 allpeople[i].move()
                 self.step_counter = self.step_counter + 1
             # TODO: Deeksha to create a new score counter which will update on each go with an increment of people * steps * energy value = GBP    
-            displaysize.fill((0, 0, 0), (0, 768, 1280, 30))
+            self.display.fill((0, 0, 0), (0, 768, 1280, 30))
             price, powerout = _power.calculatePricePowerByStepCount(self.step_counter)
             textsurface = myfont.render('Time: {} seconds | Steps: {} | Cumulative Power: {} KW, | Cost Savings: £{}'.format(str(self.seconds_counter), str(self.step_counter), str(round(powerout, 3)), str(round(price, 2)).zfill(2)), True, (255, 255, 255))
-            displaysize.blit(textsurface, (0, 768))
+            self.display.blit(textsurface, (0, 768))
             pygame.time.wait(1000)
             pygame.display.update()
             self.seconds_counter = self.seconds_counter + 1

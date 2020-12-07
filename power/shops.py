@@ -6,7 +6,7 @@ class shops:
     def __init__(self, surface, image_uri):
         self.image_uri = image_uri
         self.surface = surface
-        self.store_logo = pygame.image.load("images\\" + image_uri)
+        self.store_logo = pygame.image.load("power\\images\\" + image_uri)
 
     def draw_to_screen(self):
         # (1280 / 4) / 3 - used as the 4 shops and starting a third of the way into the image
