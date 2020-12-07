@@ -1,6 +1,6 @@
 import pytest
-from power.power import power
-from person.person import person
+#from power.power import power
+#from person.person import person
 from power.converter import converter
 import power.shopping_centre 
 
