@@ -12,14 +12,6 @@ class converter:
             return False
         else:
             return True
-
-    def generatePeopleSteps(self, number_of_people):
-        all_power = []
-        for x in range(1, number_of_people):
-            step_count = random.randint(2000, 15000)
-            power, price = calculatePricePowerByStepCount(step_count)
-            all_power.append(power)
-        return sum(all_power)
  
 if __name__ == '__main__':
     cnv = converter()
