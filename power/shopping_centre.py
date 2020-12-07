@@ -1,6 +1,6 @@
 import pygame
 from power.power import power
-from power.shops import shops
+from power.shops import shops, shops_pygame
 from power.person import person, person_pygame
 import random
 import sys, os
@@ -19,7 +19,7 @@ class shopping_centre:
         pygame.init()
         self.pers_pygame = person_pygame(self.display)
 
-    def __init_power_text(self, shopping_centre_display):
+    def __init_power_text(self):
         # initiate the font loader
         pygame.font.init()
         myfont = pygame.font.SysFont('Comic Sans MS', 16)
@@ -29,34 +29,32 @@ class shopping_centre:
         # Label the shops at the top of the screen
         myfont_shops = pygame.font.SysFont('Comic Sans MS', 48)
         textsurface_shops = myfont.render('Shops', True, (255, 255, 255))
-        shopping_centre_display.blit(textsurface_shops, (0, 10))
+        self.display.blit(textsurface_shops, (0, 10))
         return _power, textsurface, myfont
 
-    def __draw_internal_shops(self, shopping_centre_display):
+    def __draw_internal_shops(self):
         # Draw in the shops at the top of the screen
-        pygame.draw.line(shopping_centre_display, (255, 255, 255), (0, 150), (1280, 150))
+        pygame.draw.line(self.display, (255, 255, 255), (0, 150), (1280, 150))
         pygame.display.flip()
         # Draw in the shops at the bottom of the screen
-        pygame.draw.line(shopping_centre_display, (255, 255, 255), (0, 618), (1280, 618))
+        pygame.draw.line(self.display, (255, 255, 255), (0, 618), (1280, 618))
         pygame.display.flip()
         
         all_shops = []
-        all_shops.append(shops(shopping_centre_display, '1_nike_logo.png'))
-        all_shops.append(shops(shopping_centre_display, '2_subway_logo.png'))
-        all_shops.append(shops(shopping_centre_display, '3_sportdirect_logo.png'))
-        all_shops.append(shops(shopping_centre_display, '4_apple_logo.png'))
-        all_shops.append(shops(shopping_centre_display, '5_waterstones_logo.png'))
-        all_shops.append(shops(shopping_centre_display, '6_primark_logo.png'))
-        all_shops.append(shops(shopping_centre_display, '7_tesco_logo.png'))
-        all_shops.append(shops(shopping_centre_display, '8_boots_logo.png'))
+        all_shops.append(shops(shops_pygame(self.display, '1_nike_logo.png')))
+        all_shops.append(shops(shops_pygame(self.display, '2_subway_logo.png')))
+        all_shops.append(shops(shops_pygame(self.display, '3_sportdirect_logo.png')))
+        all_shops.append(shops(shops_pygame(self.display, '4_apple_logo.png')))
+        all_shops.append(shops(shops_pygame(self.display, '5_waterstones_logo.png')))
+        all_shops.append(shops(shops_pygame(self.display, '6_primark_logo.png')))
+        all_shops.append(shops(shops_pygame(self.display, '7_tesco_logo.png')))
+        all_shops.append(shops(shops_pygame(self.display, '8_boots_logo.png')))
         for x in all_shops:
             x.draw_to_screen()
         
     def draw(self):
-        
-
-        _power, textsurface, myfont = self.__init_power_text(self.display)
-        self.__draw_internal_shops(self.display)
+        _power, textsurface, myfont = self.__init_power_text()
+        self.__draw_internal_shops()
 
         # TODO: Deeksha to define number of steps as an input mechanism for each person - maybe randomise up front
         # Adding shopping centre channel in the middle of the screen 150px up top and 150px at the bottom
